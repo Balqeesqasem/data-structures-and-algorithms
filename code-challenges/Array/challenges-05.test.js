@@ -137,11 +137,10 @@ For example:
 
 const removeEvenValues = (arr) => {
   // Solution code here...
-  let counter = 0;
   for (let i = 0; i < arr.length; i++) {
     if(!(arr[i]%2 === 1)){
-      arr.splice(i+counter,1);
-      counter= counter+1;
+      arr.splice(i,1);
+      i--;
     }
   }
   return arr;
@@ -164,7 +163,16 @@ removeLastCharacters('Gregor', 9) returns ''
 ------------------------------------------------------------------------------------------------ */
 
 const removeLastCharacters = (str, numberOfCharacters) => {
-  // Solution code here...
+  //Solution code here...
+  if (numberOfCharacters < 0){
+    return str;
+  }
+  else if(numberOfCharacters < str.length){
+    return '';
+  }
+  else if (numberOfCharacters >= str.length){
+    return str.slice(0 , str.length-numberOfCharacters);
+  }
 };
 
 
@@ -191,6 +199,11 @@ For example, removeVowels('gregor') returns 'grgr'.
 
 const removeVowels = (str) => {
   // Solution code here...
+  for(let i=0 ; i<str.length ; i++){
+    if ( str[i] === 'a' || str[i] === 'e' || str[i] === 'o' || str[i] === 'u' || str[i] === 'i'){
+      return str.slice(i,i+1);
+    }
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
