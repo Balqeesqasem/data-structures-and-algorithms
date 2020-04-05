@@ -75,7 +75,6 @@ const getHouses = (arr) => {
   arr.forEach(val =>{
     houses.push(val.house);
   })
-
   return houses;
 };
 
@@ -89,21 +88,20 @@ This function should take in an array of data and a character name and return a 
 For example:
 hasChildrenValues(characters, 'Cersei') will return true
 hasChildrenValues(characters, 'Sansa') will return false
------------------------------------------------------------------------------------------------- */
+---{--------------------------------------------------------------------------------------------- */
 
 const hasChildrenValues = (arr, character) => {
   // Solution code here...
-  let char = [];
+  let char = false;
   arr.forEach(val => {
-    char.push(Object.values(val));
-    if(character === val){
-      return true;
+    //console.log(val);
+    if(character === val.name){
+      if (val.children.length > 0){
+        char =true;
+      }
     }
-    else {
-      return false;
-    }
-  }
-  )
+  })
+  return char;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -116,6 +114,18 @@ The input and output of this function are the same as the input and output from 
 
 const hasChildrenEntries = (arr, character) => {
   // Solution code here...
+  let char = false;
+  arr.forEach(val => {
+    let varib = 0;
+    //console.log(Object.entries(val))
+    varib =Object.entries(val);
+    if (varib[0][1] === character){
+      if ( varib[2][1].length > 0){
+        char = true;
+      }
+    }
+  })
+  return char;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -126,21 +136,30 @@ Write a function named totalCharacters that takes in an array and returns the nu
 
 const totalCharacters = (arr) => {
   // Solution code here...
-  
-  let array=[];
-  let count=0;
-  for (let i=0 ; i<arr.length;i++){
-    array.push(arr.toString());
-    array.join('');
-    count = count + array.length;
-  }
+  let count = 0;
+  let varib =0
+  arr.forEach(val => {
+    varib =Object.entries(val);
+    console.log(varib);
+    if ( varib[0][1].length > 0){
+      count = count +1;
+    }
+    if ( varib[2][1].length > 0){
+      count =count +varib[2][1].length;
+    }
+    if (varib[1][1] !== null )
+    {
+      count =count +1;
+    }
+
+  })
   return count;
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6 - Stretch Goal
 
-Write a function named houseSize that takes in the array of characters and creates an object for each house containing the name of the house and the number of members.
+Write a function named houseSize that takes in the array of chartacters and creates an object for each house containing the name of the house and the number of members.
 
 All of these objects should be added to an array named "sizes". Return the "sizes" array from the function.
 
