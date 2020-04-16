@@ -90,11 +90,11 @@ let biggerThanLuke = (arr) => {
     if(val.name ==='Luke Skywalker'){
       numOfMass =val.mass;
     }
-    if (val.mass > numOfMass){
+    if (Number(val.mass) > Number(numOfMass)){
       newOne.push(val.name)
     }
   });
-  return newOne;
+  return newOne.join(' - ');
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -111,9 +111,9 @@ Here is an example of the input:
 This data could be sorted by name or price.
 ------------------------------------------------------------------------------------------------ */
 
-const sortBy = (property, arr) => {
-  // Solution code here...
-};
+// Solution code here...
+const sortBy = (property, arr) => arr.sort((a, b) => a[property] > b[property]);
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -127,9 +127,10 @@ http://www.insecure.com returns false because the URL is not secure
 https://secure.com returns true because the URL is secure
 https:/missingslash.org returns false because the URL is malformed
 ------------------------------------------------------------------------------------------------ */
-const isSecure = (url) => {
+
+
 // Solution code here...
-};
+const isSecure = (url) => url.includes('https://');
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5 - Stretch Goal
@@ -149,10 +150,26 @@ Here is a sample board:
   ['X', 'O', 'X'],
 ];
 ------------------------------------------------------------------------------------------------ */
+function helpCheck(val1, val2, val3) {
+  if (val1 === val2 && val2 === val3 && val1 !==''&&val2!=='') return true;
+  return false;
+}
 
 const detectTicTacToeWin = (board) => {
-  // Solution code here...
+  let resulte = false;
+  let diagonal = [];
+  let reverseDiagonal = [];
+  board.forEach((e, i) => {
+    if (helpCheck(...board[i])) resulte = true;
+    if(helpCheck(board[0][i],board[1][i],board[2][i]))resulte = true
+    diagonal.push(board[i][i]);
+    reverseDiagonal.push(board[i][board.length - i - 1]);
+  });
+  if(helpCheck(...diagonal))resulte=true
+  if(helpCheck(...reverseDiagonal))resulte=true
+  return resulte;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
